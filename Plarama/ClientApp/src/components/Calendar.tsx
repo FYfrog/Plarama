@@ -1,5 +1,6 @@
-﻿import React, { Component, useState } from 'react';
+﻿import React from 'react';
 import ReactCalendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 interface CalendarProps {
     value: Date;
@@ -7,12 +8,6 @@ interface CalendarProps {
 }
 
 export default function Calendar(props: CalendarProps) {
-    /*const [value, setValue] = useState(new Date());
-
-    function onChange(nextValue: Date) {
-        setValue(nextValue);
-    }*/
-
     return <ReactCalendar
             onChange={props.onChange}
             value={props.value}
