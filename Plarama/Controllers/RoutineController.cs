@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Plarama.Models;
 
@@ -9,7 +10,7 @@ namespace Plarama.Controllers
   public class RoutineController : ControllerBase
   {
     [HttpGet]
-    public IEnumerable<Routine> Get()
+    public IEnumerable<Routine> Get([FromQuery]DateTime date)
     {
       return new List<Routine>
       {

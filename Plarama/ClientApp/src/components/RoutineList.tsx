@@ -9,8 +9,9 @@ interface IRoutineListState {
   loading: boolean;
 }
 
-interface IRoutine{
+interface IRoutine {
   id: bigint;
+  state: number;
   description: string;
 }
 
@@ -25,21 +26,21 @@ export class RoutineList extends Component<IRoutineListProps, IRoutineListState>
   }
 
   populateRoutineData = async () => {
-    const response = await fetch('Routine');
+    const response = await fetch(`Routine?date=${encodeURIComponent(new Intl.DateTimeFormat('en-US').format(new Date()))}`);
+    //const response = await fetch(`Routine`);
     const data = await response.json();
     this.setState({ routines: data, loading: false });
   }
 
   static renderRoutinesTable(routines: IRoutine[]) {
     return (
-      <table className='table table-striped' aria-labelledby="tabelLabel">
+      <table className="table table-sm" aria-labelledby="tabelLabel">
         <thead>
         </thead>
         <tbody>
         {routines.map(routine =>
           <tr key={routine.id.toString()}>
-            <td><Checkbox size="md" colorScheme="green" defaultIsChecked>Checkbox</Checkbox></td>
-            <td>{routine.description}</td>
+            <td><Checkbox defaultIsChecked={routine.state == 1}>{routine.description}</Checkbox></td>
           </tr>
         )}
         </tbody>
