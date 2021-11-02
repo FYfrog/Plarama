@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Plarama.Entity;
 using Plarama.Models;
 
 namespace Plarama.Controllers
@@ -9,9 +11,18 @@ namespace Plarama.Controllers
   [Route("[controller]")]
   public class RoutineController : ControllerBase
   {
+    private readonly ApplicationContext _dbContext;
+
+    public RoutineController(ApplicationContext dbContext)
+    {
+      _dbContext = dbContext;
+    }
+    
     [HttpGet]
     public IEnumerable<Routine> Get([FromQuery]DateTime date)
     {
+      var routines = _dbContext.Routines.ToList();
+      
       return new List<Routine>
       {
         new()
